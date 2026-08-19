@@ -1,1 +1,0 @@
-﻿// Standard fallback line .pot
