@@ -1,0 +1,2 @@
+static const std::unordered_set<std::wstring> textExtensions = {
+};
