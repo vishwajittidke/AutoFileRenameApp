@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/vishwajittidke/AutoFileRenameApp/master/Assets/StoreLogo.png" alt="Auto Rename App Logo" width="200" />
+  <img src="Assets/StoreLogo.png" alt="Auto Rename App Logo" width="200" />
   <h1>🚀 Auto File Rename App</h1>
   <p><strong>A highly intelligent, autonomous Windows Shell Extension that magically renames your files based on their <em>actual contents</em> using local AI models, OCR, and context extraction.</strong></p>
   
