@@ -21,7 +21,7 @@ No more `IMG_1644.jpeg` or `Document_Final_v2.docx`. Select your files, right-cl
 - 💻 **Native Windows Integration**: Built natively into the Windows Context Menu via a high-performance C++ Shell Extension.
 - ⚡ **Zero-Latency Processing**: Instantly spawns a background thread to prevent locking the Windows UI.
 - 🛡️ **Collision Resolution**: Automatically handles identical file names intelligently (e.g., `Portrait.jpeg`, `Portrait (1).jpeg`).
-- 🔒 **Offline & Local AI Support**: Leverages local Tesseract OCR and Ollama Vision models to guarantee complete privacy.
+- 🔒 **100% Native & Offline AI**: Leverages the Windows Runtime (WinRT) Native OCR API and Windows Machine Learning (WinML) with local ONNX models. Zero external API calls. Zero privacy risks.
 
 ---
 
@@ -34,13 +34,13 @@ graph TD
     C -->|Spawns Background Thread| D[ContextExtractor.cpp]
     
     D -->|Text/Code Files| E[Regex & String Parsing]
-    D -->|Binary/PDF/Word| F[Python Metadata Scripts]
+    D -->|DOCX/PBIX/PBIT| F[Native Zip/XML Parsing]
     D -->|Images| G[img_ext.py]
     
-    G -->|Tesseract OCR| H{Text Found?}
+    G -->|WinRT Native OCR| H{Text Found?}
     H -->|Yes| I[Rename based on text]
-    H -->|No| J[Ollama Vision API]
-    J -->|Detect Objects| K[Rename based on content]
+    H -->|No| J[Windows ML + ONNX Model]
+    J -->|Detect Object/Faces| K[Rename based on content]
     
     E --> L[Generate Unique Name]
     F --> L
@@ -59,19 +59,12 @@ graph TD
 To run this application locally from scratch, ensure you have the following installed:
 
 1. **Operating System**: Windows 10 / 11 (64-bit)
-2. **Python**: 3.10+ (Added to system PATH)
-3. **C++ Tools**: CMake and Visual Studio Build Tools
-4. **Tesseract OCR**: 
+2. **Python**: 3.10+ (Must be added to your system PATH)
+3. **C++ Tools**: **Visual Studio Build Tools** (You MUST install the "Desktop development with C++" workload containing MSVC and the Windows SDK).
+4. **Python Dependencies**:
+   Install the required libraries (we recommend doing this in your global environment for the shell extension to easily access it, or set up a system-wide Virtual Environment):
    ```powershell
-   winget install -e --id UB-Mannheim.TesseractOCR
-   ```
-5. **Ollama**: Download and install from [ollama.com](https://ollama.com/), then run:
-   ```powershell
-   ollama run llama3.2-vision
-   ```
-6. **Python Dependencies**:
-   ```powershell
-   pip install pytesseract pillow pypdf2 docx2txt ollama google-genai openai pywinauto mss opencv-python
+   pip install winsdk numpy pillow
    ```
 
 ---
@@ -87,18 +80,32 @@ cmake ..
 cmake --build . --config Release
 ```
 
-### 2. Register the Shell Extension
+### 2. Prepare the Scripts
+**Critical Step:** The compiled DLL expects the Python scripts to be exactly located at `..\..\src\` relative to itself. Do not move `AutoRename.dll` out of its `build/Release` folder without also moving the `src/` folder alongside it.
+
+### 3. Register the Shell Extension
 Register the newly compiled DLL with the Windows Registry:
 ```powershell
 cd Release
 regsvr32 AutoRename.dll
 ```
 
-### 3. Restart Windows Explorer
+### 4. Restart Windows Explorer
 To force Windows to load the new context menu entry instantly:
 ```powershell
 Stop-Process -Name explorer -Force
 ```
+
+---
+
+## 💡 Troubleshooting
+
+If files are not renaming:
+1. Ensure your Python installation is accessible via the `python` command in PowerShell.
+2. Run the fallback test app directly in your terminal to see real-time error logs:
+   ```powershell
+   .\build\Release\TestApp.exe "D:\Path\To\Failing\File.jpg"
+   ```
 
 ---
 
