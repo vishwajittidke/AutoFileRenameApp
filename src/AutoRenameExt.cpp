@@ -3,6 +3,8 @@
 #include "ContextExtractor.h"
 #include <strsafe.h>
 #include <thread>
+#include <chrono>
+#include <iostream>
 #include <shellapi.h>
 #include <shlwapi.h>
 
@@ -194,11 +196,32 @@ void AutoRenameExt::ProcessFiles()
 {
     std::vector<std::wstring> filesCopy = m_selectedFiles;
     std::thread([filesCopy]() {
+        // --- 1. Launch Pad (Native Win32 Console) ---
+        AllocConsole();
+        FILE* fpOut;
+        freopen_s(&fpOut, "CONOUT$", "w", stdout);
+        SetConsoleTitleW(L"🚀 Auto Rename Launch Pad");
+        
+        std::wcout << L"=======================================\n";
+        std::wcout << L"    LAUNCH PAD: FILE RENAME SYSTEM     \n";
+        std::wcout << L"=======================================\n\n";
+
         ContextExtractor extractor;
         std::vector<std::wstring> generatedNames;
         
         for (const auto& file : filesCopy)
         {
+            std::wcout << L"[+] Targeting File: " << file << L"\n";
+            std::wcout << L"    Firing rockets ";
+            
+            // --- 2. Rocket Animation ---
+            for(int i=0; i<3; i++) {
+                std::wcout << L"🚀";
+                std::wcout.flush();
+                std::this_thread::sleep_for(std::chrono::milliseconds(300));
+            }
+            std::wcout << L"\n";
+
             std::wstring newName = extractor.GetNewNameForFile(file);
             if (!newName.empty() && newName != file)
             {
@@ -214,6 +237,8 @@ void AutoRenameExt::ProcessFiles()
                         break;
                     }
                     
+                    std::wcout << L"    [!] Duplicate found! Resolving collision...\n";
+                    
                     // Insert (counter) before the extension
                     size_t dotPos = newName.find_last_of(L".");
                     if (dotPos != std::wstring::npos) {
@@ -225,6 +250,7 @@ void AutoRenameExt::ProcessFiles()
                 }
                 
                 generatedNames.push_back(uniqueName);
+                std::wcout << L"    [>] Renaming to: " << uniqueName << L"\n\n";
                 
                 std::wstring fromFile = file + L'\0' + L'\0';
                 std::wstring toFile = uniqueName + L'\0' + L'\0';
@@ -239,5 +265,15 @@ void AutoRenameExt::ProcessFiles()
                 SHFileOperationW(&fileOp);
             }
         }
+
+        std::wcout << L"\n[+] Processing complete! Closing Launch Pad in 2 seconds...\n";
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+        
+        fclose(fpOut);
+        FreeConsole();
+
+        // --- 3. Success Message Box ---
+        MessageBoxW(NULL, L"rename of the file is successfully done.", L"Success", MB_OK | MB_ICONINFORMATION);
+
     }).detach();
 }
