@@ -25,6 +25,9 @@ No more `IMG_1644.jpeg` or `Document_Final_v2.docx`. Select your files, right-cl
 - ⚡ **Zero-Latency Processing**: Instantly spawns a background thread to prevent locking the Windows UI.
 - 🛡️ **Collision Resolution**: Automatically handles identical file names intelligently (e.g., `Portrait.jpeg`, `Portrait (1).jpeg`).
 - 🔒 **100% Native & Offline AI**: Leverages the Windows Runtime (WinRT) Native OCR API and Windows Machine Learning (WinML) with local ONNX models. Zero external API calls. Zero privacy risks.
+- 🚀 **Terminal Launch Pad**: Opens a sleek, native Win32 console to display real-time renaming logs and collision detection warnings.
+- 🎆 **Animated UX**: Features a lightweight CLI ASCII rocket animation during the AI processing phase.
+- 🔔 **Smart Notifications**: Utilizes native Windows 10/11 Toast Notifications to confirm successful file renames silently without stealing focus.
 
 ---
 
@@ -70,34 +73,7 @@ To run this application locally from scratch, ensure you have the following inst
    pip install winsdk numpy pillow
    ```
 
----
 
-## 🚀 Installation & Build
-
-### 1. Clone and Compile
-Open an Administrator PowerShell window in the root directory:
-```powershell
-mkdir build
-cd build
-cmake ..
-cmake --build . --config Release
-```
-
-### 2. Prepare the Scripts
-**Critical Step:** The compiled DLL expects the Python scripts to be exactly located at `..\..\src\` relative to itself. Do not move `AutoRename.dll` out of its `build/Release` folder without also moving the `src/` folder alongside it.
-
-### 3. Register the Shell Extension
-Register the newly compiled DLL with the Windows Registry:
-```powershell
-cd Release
-regsvr32 AutoRename.dll
-```
-
-### 4. Restart Windows Explorer
-To force Windows to load the new context menu entry instantly:
-```powershell
-Stop-Process -Name explorer -Force
-```
 
 ---
 
