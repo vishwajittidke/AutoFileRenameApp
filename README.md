@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="Assets/StoreLogo.png" alt="Auto Rename App Logo" width="800" />
-  <h1>🚀 Auto File Rename App</h1>
+  <img src="Assets/StoreLogo.png" alt="Windows Context-Aware File Renamer Logo" width="800" />
+  <h1>🚀 Windows Context-Aware File Renamer</h1>
   <p><strong>A highly intelligent, autonomous Windows Shell Extension that magically renames your files based on their <em>actual contents</em> using local AI models, OCR, and context extraction.</strong></p>
   
   [![Windows](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-blue.svg)](https://microsoft.com)
@@ -14,7 +14,7 @@
 No more `IMG_1644.jpeg` or `Document_Final_v2.docx`. Select your files, right-click, and let the AI instantly rename them to what they actually are.
 
 ### 🎥 Watch it in action:
-<video src="https://github.com/vishwajittidke/AutoFileRenameApp/raw/master/Assets/Auto%20Rename%20Demo.mp4" controls="controls" muted="muted" style="max-width: 100%; border-radius: 8px;"></video>
+<video src="https://github.com/vishwajittidke/Windows-Context-Aware-File-Renamer/raw/master/Assets/Auto%20Rename%20Demo.mp4" controls="controls" muted="muted" style="max-width: 100%; border-radius: 8px;"></video>
 
 ---
 
