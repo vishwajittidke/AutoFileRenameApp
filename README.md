@@ -12,7 +12,8 @@
 <br/>
 
 ### Demo
-<video src="https://github.com/vishwajittidke/Windows-Context-Aware-File-Renamer/raw/master/Assets/Auto%20Rename%20Demo.mp4" controls="controls" muted="muted" style="max-width: 100%; border-radius: 8px;"></video>
+
+https://github.com/user-attachments/assets/1dc5c961-ec68-46c9-96af-218c4201dd28
 
 ---
 
