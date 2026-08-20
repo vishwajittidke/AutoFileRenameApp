@@ -13,6 +13,9 @@
 
 No more `IMG_1644.jpeg` or `Document_Final_v2.docx`. Select your files, right-click, and let the AI instantly rename them to what they actually are.
 
+### 🎥 Watch it in action:
+<video src="https://github.com/vishwajittidke/AutoFileRenameApp/raw/master/Assets/Auto%20Rename%20Demo.mp4" controls="controls" muted="muted" style="max-width: 100%; border-radius: 8px;"></video>
+
 ---
 
 ## ✨ Features
