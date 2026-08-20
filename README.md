@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="Assets/StoreLogo.png" alt="Windows Context-Aware File Renamer Logo" width="800" />
+  <img src="Assets/StoreLogo.png" alt="Windows Context-Aware File Renamer Logo" style="width: 100%; max-width: 800px; border-radius: 12px; margin-bottom: 20px;" />
   <h1>🚀 Windows Context-Aware File Renamer</h1>
   <p><strong>A highly intelligent, autonomous Windows Shell Extension that magically renames your files based on their <em>actual contents</em> using local AI models, OCR, and context extraction.</strong></p>
   
