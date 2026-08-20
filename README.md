@@ -63,12 +63,13 @@ graph TD
 2. **Runtime**: Python 3.10+ (In system PATH)
 3. **Compiler**: Visual Studio Build Tools (C++ Desktop Development, MSVC, Windows SDK)
 4. **Dependencies**: `pip install winsdk numpy pillow`
+5. **AI Models**: Ensure the required ONNX models are present in the `src/` directory for local image processing.
 
 ---
 
 ## Installation & Build
 
-**1. Build**
+### 1. Build
 ```powershell
 mkdir build
 cd build
@@ -76,13 +77,17 @@ cmake ..
 cmake --build . --config Release
 ```
 
-**2. Register DLL**
+### 2. Prepare Environment
+> [!IMPORTANT]
+> The compiled DLL expects the Python scripts to be located exactly at `..\..\src\` relative to itself. Do not move `AutoRename.dll` out of its `build/Release` directory without also moving the `src/` folder alongside it.
+
+### 3. Register DLL
 ```powershell
 cd Release
 regsvr32 AutoRename.dll
 ```
 
-**3. Restart Explorer**
+### 4. Restart Explorer
 ```powershell
 Stop-Process -Name explorer -Force
 ```
